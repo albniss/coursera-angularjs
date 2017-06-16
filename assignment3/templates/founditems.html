@@ -1,3 +1,7 @@
-<div>
-  <div ng-repeat="item in narrowitdown.foundItems">Hey!</div>
-</div>
+<span ng-show="foundItemsController.found.length == 0">Nothing is found (or textbox is empty)</span>
+<ul>
+  <li ng-repeat="item in foundItemsController.found">
+    {{item.name}},{{item.short_name}},{{item.description}}
+    <button ng-click="foundItemsController.onRemove({index:$index})">Don't want this one!</button>
+  </li>
+</ul>

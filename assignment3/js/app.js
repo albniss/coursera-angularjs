@@ -8,10 +8,12 @@
 
   function FoundItemsDirective () {
     var ddo = {
-      restrict: 'E',
       templateUrl: '/templates/founditems.html',
-      foundItems: '<',
-
+      restrict: 'E',
+      scope: {
+        found: '<',
+        onRemove: '&'
+      },
       controller: FoundItemsDirectiveController,
       controllerAs: 'foundItemsController',
       bindToController: true
@@ -29,12 +31,16 @@
     var narrowitdown = this;
 
     narrowitdown.searchValue="";
-    narrowitdown.foundItems=[];
+    narrowitdown.found=undefined;
+
+    narrowitdown.remove = function (index) {
+      narrowitdown.found.splice(index,1);
+    }
 
     narrowitdown.goClick = function () {
       MenuSearchService.getMatchedMenuItems(narrowitdown.searchValue).then(
         function (foundItems) {
-          narrowitdown.foundItems = foundItems;
+          narrowitdown.found = foundItems;
         });
       }
     }
@@ -48,6 +54,9 @@
           method: "GET",
           url: "https://davids-restaurant.herokuapp.com/menu_items.json"
         }).then(function (result) {
+          if (searchTerm == "")
+            return [];
+
           var menuItems=result.data.menu_items;
 
           // process result and only keep items that match
