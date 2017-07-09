@@ -1,0 +1,32 @@
+<div class="container signup">
+  <h2 class="text-center">
+    My information
+  </h2>
+
+  <div ng-show="myInfoCtlr.user.firstName === undefined">
+    <h3 class="text-center">
+      Not Signed Up Yet.
+      <a ui-sref="public.signup">Sign up Now!</a>
+    </h3>
+  </div>
+
+  <div ng-show="myInfoCtlr.user.firstName !== undefined">
+    <span>First name: {{myInfoCtlr.user.firstName}}</span>
+    <br>
+
+    <span>Last name: {{myInfoCtlr.user.lastName}}</span>
+    <br>
+
+    <span>E-mail: {{myInfoCtlr.user.email}}</span>
+    <br>
+
+    <span>Phone number: {{myInfoCtlr.user.phone}}</span>
+    <br>
+
+    <span>Favorite dish name: {{myInfoCtlr.user.favDish}}</span>
+    <br>
+
+    <menu-item menu-item="myInfoCtlr.user.menuItem"></menu-item>
+  </div>
+
+</div>
